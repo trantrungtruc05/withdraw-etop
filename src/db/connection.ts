@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 
 import { ConfigInfo } from "../entity/ConfigInfo";
-import { EtopItemPage } from "../entity/EtopItemPage";
 
 const connection = new Sequelize({
   dialect: "postgres",
@@ -10,7 +9,7 @@ const connection = new Sequelize({
   password: "652606",
   database: "crawl",
   logging: false,
-  models: [ConfigInfo, EtopItemPage],
+  models: [ConfigInfo],
 });
 
 export default connection;
