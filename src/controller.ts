@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import axios from 'axios';
 import { ConfigInfo } from './entity/ConfigInfo';
+import nodemailer from 'nodemailer'
 
 const { QueryTypes } = require('sequelize');
 import connection from './db/connection';
@@ -9,7 +10,6 @@ var cron = require('node-cron');
 var querystring = require('querystring');
 
 export let withdraw = async (req, res) => {
-
 
     cron.schedule('*/2 * * * * *', async () => {
         console.log('Connect withdraw etop');
@@ -41,6 +41,24 @@ export let withdraw = async (req, res) => {
                     'Cookie': cookieEtopWithdrawItem[0].value
                 }
             });
+
+            // send mail
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'crawlgame91@gmail.com',
+                    pass: 'trungtruc'
+                }
+            });
+
+            var mailOptions = {
+                from: 'crawlgame91@gmail.com',
+                to: 'hotrongtin90@gmail.com;hominhtrang2021@gmail.com',
+                subject: `Rút item ${(items[i] as any).name}`,
+                text: `Rút item ${(items[i] as any).name}`
+            };
+
+            transporter.sendMail(mailOptions);
 
         }
 
