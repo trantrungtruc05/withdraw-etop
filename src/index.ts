@@ -13,13 +13,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.route("/withdraw/:category").get(controller.withdraw);
 
-// cron.schedule('*/2 * * * * *', async () => {
-//   withdrawService.withdraw('csgo');
-// });
+cron.schedule('*/2 * * * * *', async () => {
+  withdrawService.withdraw('csgo');
+});
 
-// cron.schedule('*/2 * * * * *', async () => {
-//   withdrawService.withdraw('dota');
-// });
+cron.schedule('*/2 * * * * *', async () => {
+  withdrawService.withdraw('dota');
+});
 
 app.listen(port, async () => {
   await connection.sync();
