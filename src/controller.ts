@@ -4,6 +4,9 @@ import * as withdrawService from './service/withdrawService';
 
 export let withdraw = async (req, res) => {
     const { category } = req.params;
-    withdrawService.withdraw(category);
+    let currDate = new Date();
+    const hour = currDate.getHours();
+    console.log(`>>>> ${hour}`);
+    // withdrawService.withdraw(category);
     return res.status(200).send('withdraw_success');
 };
