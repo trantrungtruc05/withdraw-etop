@@ -17,16 +17,18 @@ export let withdraw = async (category) => {
 
         var proxy = proxyLisy[Math.floor(Math.random() * proxyLisy.length)];
 
-        const cookieEtopWithdrawItem: ConfigInfo[] = await ConfigInfo.findAll({ where: { key: "etop_withdraw", type: "cookie" } });
-
-        const withdrawLink = 'https://www.etopfun.com/api/ingotitems/realitemback/exchange.do';
-
+        var cookieEtopWithdrawItem : ConfigInfo[];
+    
         var items;
         if (category === 'csgo') {
             items = await connection.query("select eip.name, eip.id_item idItem, eip.quantity as quantity from queue_etop_item_with_draw qd inner join etopfun_item_page eip on qd.name = eip.name where qd.status = false order by qd.price_by_vnd desc", { type: QueryTypes.SELECT });
+            cookieEtopWithdrawItem = await ConfigInfo.findAll({ where: { key: "etop_withdraw", type: "cookie" } });
         } else {
             items = await connection.query("select eip.name, eip.id_item idItem, eip.quantity as quantity from queue_etop_item_with_draw qd inner join etopfun_item_dota_page eip on qd.name = eip.name where qd.status = false order by qd.price_by_vnd desc", { type: QueryTypes.SELECT });
+            cookieEtopWithdrawItem = await ConfigInfo.findAll({ where: { key: "etop_withdraw_dota", type: "cookie" } });
         }
+
+        const withdrawLink = 'https://www.etopfun.com/api/ingotitems/realitemback/exchange.do';
         for (let i = 0; i < items.length; i++) {
             axios.post(withdrawLink, querystring.stringify({
                 id: `${(items[i] as any).iditem}`,
