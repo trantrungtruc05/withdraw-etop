@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.route("/withdraw/:category").get(controller.withdraw);
 
-cron.schedule('*/2 * * * * *', async () => {
+cron.schedule('*/1 * * * * *', async () => {
   withdrawService.withdraw('csgo');
 });
 
