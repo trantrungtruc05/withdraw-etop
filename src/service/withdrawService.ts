@@ -50,22 +50,22 @@ export let withdraw = async (category) => {
             });
 
             // send mail
-            var transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: 'crawlgame91@gmail.com',
-                    pass: 'Trungtruc'
-                }
-            });
+            // var transporter = nodemailer.createTransport({
+            //     service: 'gmail',
+            //     auth: {
+            //         user: 'crawlgame91@gmail.com',
+            //         pass: 'Trungtruc'
+            //     }
+            // });
 
-            var mailOptions = {
-                from: 'crawlgame91@gmail.com',
-                to: 'hotrongtin90@gmail.com;hominhtrang2021@gmail.com',
-                subject: `Rút item ${(items[i] as any).name}`,
-                text: `Rút item ${(items[i] as any).name}`
-            };
+            // var mailOptions = {
+            //     from: 'crawlgame91@gmail.com',
+            //     to: 'hotrongtin90@gmail.com;hominhtrang2021@gmail.com',
+            //     subject: `Rút item ${(items[i] as any).name}`,
+            //     text: `Rút item ${(items[i] as any).name}`
+            // };
 
-            transporter.sendMail(mailOptions);
+            // transporter.sendMail(mailOptions);
 
         }
     } else {
